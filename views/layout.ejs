@@ -4,13 +4,15 @@
   <meta charset="UTF-8">
   <title>Utilizando o EJS</title>
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <!-- Linkando os ícones ao seu site -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
   <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
-  <header>
+
 
       <nav class="navbar navbar-light bg-dark ">
-          <a class="navbar-brand text-white ">EduNOW</a>
+          <a href="/" class="navbar-brand text-white ">EduNOW</a>
      <!-- <nav class="navbar navbar-inverse">
       <ul class="nav navbar-nav">
         <li><a href="/">Home</a></li>
@@ -21,13 +23,57 @@
         <li><a href="/contact">Contact</a></li>
       </ul> -->
      </nav>
-  </header>  
+  
 
    <main>
      <div class="container">
       <%- body %>
      </div>
    </main>
+
+   <footer class="bg-black p-5 ">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <a href="/"  class="navbar-brand text-white ">EduNOW</a>
+          </div>
+          <div class="col-12 col-md-3">
+            <ul class="list-inline">
+              <li><a href="#">home</a></li>
+              <li><a href="#">Sobre nós</a></li>
+              <li><a href="#">Preço</a></li>
+              <li><a href="#">Contato</a></li>
+            </ul>
+            
+          </div>
+          <div class="col-12 col-md-3">
+            <ul class="list-inline">
+              <li><a href="#">blog</a></li>
+              <li><a href="#">Pesquisa</a></li>
+              <li><a href="#">Privacidade</a></li>
+              <li><a href="#">Comunidade</a></li>
+            </ul>
+            
+          </div>
+          <div class="col-12 col-md-3 ">
+                <ul class="list-inline">
+                         <li class="list-inline-item p-3">
+                            <a href="#"><i class="icon-social-facebook text-center text-white"></i></a>
+                         </li>
+                         <li class="list-inline-item p-3">
+                            <a href="#"><i class="icon-social-twitter text-center text-white"></i></a>
+                         </li>
+                         <li class="list-inline-item p-3">
+                            <a href="#"><i class="icon-social-instagram text-center text-white"></i></a>
+                         </li>
+                      </ul>
+    
+    
+          </div>
+        </div>
+      </div>
+    
+      </footer>
 
 </body>
 </html>  

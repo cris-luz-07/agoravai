@@ -3,12 +3,39 @@ body {
     line-height: 1.5;
 }
 
-header .navbar {
+header{ 
+
+    background: url("https://raw.githubusercontent.com/cris-luz-07/agoravai/master/public/img/banner-home.jpg") no-repeat center center;
+    background-size: cover;
+    height: 85%;
+    width: 100%;
+    padding-top: 5rem;
+    padding-bottom: 2rem;
+   
+   }
+
+/* header .navbar {
     border-radius: 0;
     margin: 0;
-}
+} */
 
-main {
+/* main {
     min-height: 500px;
     padding: 50px 0;
+} */
+
+.form-home{ 
+    background: #ffffffa8;
+  }
+
+.bg-black{
+
+  background-color: #000000;
 }
+
+ul li a,ul li a:hover {
+   color: #fff;
+  }
+.form-control:focus {
+      box-shadow: 0 0 0 0.2rem #1d212430;
+}	

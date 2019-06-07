@@ -26,7 +26,7 @@ app.get('/logado', (req, res) => {
     res.render('pages/logado')
 })
 
-app.get('/signup', (req, res) => {
+app.post('/signup', (req, res) => {
     res.render('pages/signup')
 })
 
