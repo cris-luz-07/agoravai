@@ -3,18 +3,16 @@ const bodyParser = require('body-parser')
 const expressLayouts = require('express-ejs-layouts')
 const app = express()
 const mongoose = require('mongoose');
-var User = require('./model/User.model');
+const User = require('./model/User.model');
 const port = process.env.PORT || 5000
 
 app.set('view engine', 'ejs')     // Setamos que nossa engine será o ejs
 app.use(expressLayouts)           // Definimos que vamos utilizar o express-ejs-layouts na nossa aplicação
 app.use(bodyParser.urlencoded())  // Com essa configuração, vamos conseguir parsear o corpo das requisições
 
-// var port = 27017;
-// var db = 'mongodb+srv://Luz:luz07@cluster0-cngjv.mongodb.net/test?retryWrites=true&w=majority'
-// var db = DATABASE_URL
-
-mongoose.connect(DATABASE_URL);
+// erro na configuração de variavel de ambiente nodejs
+const db = 'mongodb+srv://Luz:luz07@cluster0-cngjv.mongodb.net/test?retryWrites=true&w=majority'
+mongoose.connect(db);
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
@@ -22,7 +20,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.post('/user', function(req, res) {
-    var newUser = new User();
+  const newUser = new User();
   
     newUser.nome = req.body.nome;
     newUser.sobrenome = req.body.sobrenome;
