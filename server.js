@@ -33,7 +33,7 @@ app.post('/user', function(req, res) {
         console.log(err);
       } else {
         console.log(user);
-        res.render('pages/logado');
+        res.render('pages/entrada');
       }
     });
   });
