@@ -12,9 +12,9 @@ app.use(bodyParser.urlencoded())  // Com essa configuração, vamos conseguir pa
 
 // var port = 27017;
 // var db = 'mongodb+srv://Luz:luz07@cluster0-cngjv.mongodb.net/test?retryWrites=true&w=majority'
-var db = DATABASE_URL
+// var db = DATABASE_URL
 
-mongoose.connect(db);
+mongoose.connect(DATABASE_URL);
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
