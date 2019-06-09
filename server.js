@@ -37,6 +37,25 @@ app.post('/user', function(req, res) {
     });
   });
 
+
+  app.get('/user', function(req, res) {
+    var newUser = new User();
+  
+    newUser.nome = req.body.nome;
+    newUser.sobrenome = req.body.sobrenome;
+    newUser.email = req.body.email;
+    newUser.senha = req.body.senha;
+
+    newUser.save(function(err, user) {
+      if(err) {
+        res.send('error saving user');
+      } else {
+        console.log(user);
+        res.send(user);
+      }
+    });
+  });
+
 app.use(express.static(__dirname + '/public'))
 app.listen(port, () => {
     console.log(`A mágica acontece em http://localhost:${port}`)
