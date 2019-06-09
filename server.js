@@ -11,7 +11,9 @@ app.use(expressLayouts)           // Definimos que vamos utilizar o express-ejs-
 app.use(bodyParser.urlencoded())  // Com essa configuração, vamos conseguir parsear o corpo das requisições
 
 // var port = 27017;
-var db = 'mongodb+srv://Luz:luz07@cluster0-cngjv.mongodb.net/test?retryWrites=true&w=majority'
+// var db = 'mongodb+srv://Luz:luz07@cluster0-cngjv.mongodb.net/test?retryWrites=true&w=majority'
+var db = MONGO_DB;
+
 mongoose.connect(db);
 
 app.use(bodyParser.json())
