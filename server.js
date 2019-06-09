@@ -1,13 +1,41 @@
 const express = require('express')
-const faker = require('faker')
 const bodyParser = require('body-parser')
 const expressLayouts = require('express-ejs-layouts')
 const app = express()
+const mongoose = require('mongoose');
+var User = require('./model/User.model');
 const port = process.env.PORT || 5000
 
 app.set('view engine', 'ejs')     // Setamos que nossa engine será o ejs
 app.use(expressLayouts)           // Definimos que vamos utilizar o express-ejs-layouts na nossa aplicação
 app.use(bodyParser.urlencoded())  // Com essa configuração, vamos conseguir parsear o corpo das requisições
+
+// var port = 27017;
+var db = 'mongodb://localhost/signup'
+mongoose.connect(db);
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+app.post('/user', function(req, res) {
+    var newUser = new User();
+  
+    newUser.nome = req.body.nome;
+    newUser.sobrenome = req.body.sobrenome;
+    newUser.email = req.body.email;
+    newUser.senha = req.body.senha;
+
+    newUser.save(function(err, user) {
+      if(err) {
+        res.send('error saving user');
+      } else {
+        console.log(user);
+        res.send(user);
+      }
+    });
+  });
 
 app.use(express.static(__dirname + '/public'))
 app.listen(port, () => {
@@ -32,34 +60,4 @@ app.post('/signup', (req, res) => {
 
 app.get('/entrada', (req, res) => {
     res.render('pages/entrada')
-})
-
-
-
-app.get('/about', (req, res) => {
-    var users = [{
-        name: faker.name.findName(),
-        email: faker.internet.email(),
-        avatar: 'http://placebear.com/300/300'
-    }, {
-        name: faker.name.findName(),
-        email: faker.internet.email(),
-        avatar: 'http://placebear.com/400/300'
-    }, {
-        name: faker.name.findName(),
-        email: faker.internet.email(),
-        avatar: 'http://placebear.com/500/300'
-    }]
-
-    res.render('pages/about', {
-        usuarios: users
-    })
-})
-
-app.get('/contact', (req, res) => {
-    res.render('pages/contact')
-})
-
-app.post('/contact', (req, res) => {
-    res.send('Obrigado por entrar em contato conosco, ' + req.body.name + '! Responderemos em breve!')
 })
