@@ -30,6 +30,7 @@ app.post('/user', function(req, res) {
     newUser.save(function(err, user) {
       if(err) {
         res.send('error saving user hhhh22222');
+        console.log(err);
       } else {
         console.log(user);
         res.send(user);
