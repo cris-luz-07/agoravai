@@ -29,7 +29,7 @@ app.post('/user', function(req, res) {
 
     newUser.save(function(err, user) {
       if(err) {
-        res.send('error saving user');
+        res.send('error saving user hhhh22222');
       } else {
         console.log(user);
         res.send(user);
