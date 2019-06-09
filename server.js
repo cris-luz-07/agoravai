@@ -3,24 +3,40 @@ const bodyParser = require('body-parser')
 const expressLayouts = require('express-ejs-layouts')
 const app = express()
 const mongoose = require('mongoose');
-const User = require('./model/User.model');
+var User = require('./model/User.model');
+let expressValidator = require('express-validator');
 const port = process.env.PORT || 5000
 
+// app.configure(function(){
+//   app.use(express.bodyParser());
+// });
 app.set('view engine', 'ejs')     // Setamos que nossa engine será o ejs
 app.use(expressLayouts)           // Definimos que vamos utilizar o express-ejs-layouts na nossa aplicação
 app.use(bodyParser.urlencoded())  // Com essa configuração, vamos conseguir parsear o corpo das requisições
+app.use(bodyParser.json())
 
-// erro na configuração de variavel de ambiente nodejs
-const db = 'mongodb+srv://Luz:luz07@cluster0-cngjv.mongodb.net/test?retryWrites=true&w=majority'
+// var port = 27017;
+//var db = 'mongodb://localhost/signup'// LOCAL
+var db = 'mongodb+srv://Luz:luz07@cluster0-cngjv.mongodb.net/test?retryWrites=true&w=majority'
+
 mongoose.connect(db);
+var connection = mongoose.connection;
 
+mongoose.connection.on('error',function (err) {  
+  console.log('Erro na conexão Mongoose padrão ...: ' + err);
+});
+
+connection.once('open', function(){
+  console.log("Conectado ao MongoDB");
+});
+app.use(expressValidator());
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.post('/user', function(req, res) {
-  const newUser = new User();
+app.post('/cadastrar', function(req, res) {
+    var newUser = new User();
   
     newUser.nome = req.body.nome;
     newUser.sobrenome = req.body.sobrenome;
@@ -29,15 +45,44 @@ app.post('/user', function(req, res) {
 
     newUser.save(function(err, user) {
       if(err) {
-        res.send('error saving user hhhh22222');
-        console.log(err);
+        // res.send('error saving user');
+        res.render('pages/home')
       } else {
+        res.render('pages/logado')
         console.log(user);
-        res.render('pages/entrada');
+        // res.send(user);
       }
     });
   });
 
+  app.post('/autenticar', (req, res) => {
+    var dadosForm = req.body;
+    // console.log(dadosForm)
+    // res.send(req.body.senha + req.body.email + '! uhuu!')
+        connection.db.collection("users", function(err, collection){  
+        collection.find({}).toArray(function(err, data){
+          let validar= false;
+      
+          // console.log(dadosForm)
+          // console.log(req.body.email)
+        for(var i = 0; i < data.length; i++) {
+       
+
+          if (data[i].email == req.body.email & data[i].senha == req.body.senha) {
+            validar = true;
+          }
+         
+        }
+
+        if (validar ==  true) {
+          res.render('pages/logado')
+        } else {
+          res.render('pages/home')
+        }
+        }) 
+      })       
+})
+ 
 
 
 
