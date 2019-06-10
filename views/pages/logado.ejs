@@ -1,12 +1,7 @@
 <%- contentFor('body') %>
-<!-- <div class="jumbotron text-center">
-    <h1>Logado</h1>
-    <div class="row">
 
-        <p>oiii</p>
 
-    </div>
-</div> -->
+
 <nav class="navbar navbar-light bg-dark ">
       <a href="/" class="navbar-brand text-white ">EduNOW</a>
 </nav>   
@@ -16,8 +11,49 @@
 <section class=" p-5">
 <h2 class="text-center pb-5">Seus cursos:</h2>
 <div class="container ">
-       
-<div class="row d-flex align-content-center justify-content-center text-center">
+
+
+
+      <header>
+            <div class="container">
+                    <div class="row ">
+                        <div class="col-md-4 form-home offset-md-7 p-4">
+                            <h2 class="mb-4">Veja os seus cursos</h2>
+                            <form action="/acessarCursos" method="POST">
+                                <button type="submit" class="btn btn-lg btn-block btn-outline-dark">Enviar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>	
+            </header>
+
+      <!-- <div class="row d-flex align-content-center justify-content-center text-center">
+            <div class="col-12 col-md-3 ">
+        -->
+      <!-- <% if(data.length > 0){ %>
+      
+
+         <div class="row d-flex align-content-center justify-content-center text-center">
+               <% for(var i = 0; i < data.length; i++) {%>
+                 
+                  <div class="col-12 col-md-3 ">
+                  <div class="card border-dark mb-3" style="max-width: 18rem;">
+                        <div class="card-header">
+                           <img class="img-fluid w-25" src="https://raw.githubusercontent.com/cris-luz-07/agoravai/master/public/img/HTML5.png">
+                        </div>
+                           <div class="card-body text-dark">
+                           <h5 class="card-title"><%=data[i].curso%></h5>
+                           </div>        
+                  </div>
+               </div>
+            
+
+               <% } %>
+            </div>
+         
+      <% } %> -->
+
+<!-- <div class="row d-flex align-content-center justify-content-center text-center">
    <div class="col-12 col-md-3 ">
    
 
@@ -61,4 +97,6 @@
    </div>		
 </div>
 </div>
-</section>
+</div>
+</div>
+</section> -->

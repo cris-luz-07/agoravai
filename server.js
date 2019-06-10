@@ -16,8 +16,8 @@ app.use(bodyParser.urlencoded())  // Com essa configuração, vamos conseguir pa
 app.use(bodyParser.json())
 
 // var port = 27017;
-//var db = 'mongodb://localhost/signup'// LOCAL
-var db = 'mongodb+srv://Luz:luz07@cluster0-cngjv.mongodb.net/test?retryWrites=true&w=majority'
+var db = 'mongodb://localhost/signup3'// LOCAL
+// var db = 'mongodb+srv://Luz:luz07@cluster0-cngjv.mongodb.net/test?retryWrites=true&w=majority'
 
 mongoose.connect(db);
 var connection = mongoose.connection;
@@ -37,11 +37,14 @@ app.use(bodyParser.urlencoded({
 
 app.post('/cadastrar', function(req, res) {
     var newUser = new User();
-  
+
     newUser.nome = req.body.nome;
     newUser.sobrenome = req.body.sobrenome;
     newUser.email = req.body.email;
-    newUser.senha = req.body.senha;
+    newUser.curso = req.body.curso;
+     newUser.senha = req.body.senha;
+    
+
 
     newUser.save(function(err, user) {
       if(err) {
@@ -75,7 +78,8 @@ app.post('/cadastrar', function(req, res) {
         }
 
         if (validar ==  true) {
-          res.render('pages/logado')
+          res.render('pages/logado', { data})
+          console.log(data)
         } else {
           res.render('pages/home')
         }
@@ -83,7 +87,6 @@ app.post('/cadastrar', function(req, res) {
       })       
 })
  
-
 
 
 app.use(express.static(__dirname + '/public'))
@@ -95,12 +98,12 @@ app.get('/', (req, res) => {
     res.render('pages/home')
 })
 
-app.get('/login', (req, res) => {
-    res.render('pages/login')
-})
+// app.get('/login', (req, res) => {
+//     res.render('pages/login')
+// })
 
 app.get('/logado', (req, res) => {
-    res.render('pages/logado')
+    res.render('pages/home')
 })
 
 app.post('/signup', (req, res) => {
@@ -108,5 +111,5 @@ app.post('/signup', (req, res) => {
 })
 
 app.get('/entrada', (req, res) => {
-    res.render('pages/entrada')
+    res.render('pages/home')
 })
