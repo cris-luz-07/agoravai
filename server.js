@@ -78,8 +78,8 @@ app.post('/cadastrar', function(req, res) {
         }
 
         if (validar ==  true) {
-          res.render('pages/logado', { data})
-          console.log(data)
+          res.render('pages/entrada')
+          
         } else {
           res.render('pages/home')
         }
