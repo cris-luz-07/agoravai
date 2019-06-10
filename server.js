@@ -78,8 +78,8 @@ app.post('/cadastrar', function(req, res) {
         }
 
         if (validar ==  true) {
-          res.render('pages/entrada')
-          
+          res.render('pages/logado', { data})
+          console.log(data)
         } else {
           res.render('pages/home')
         }
@@ -87,6 +87,13 @@ app.post('/cadastrar', function(req, res) {
       })       
 })
  
+// app.get('/show', (req, res) => {
+//   db.collection('data').find().toArray((err, results) => {
+//       if (err) return console.log(err)
+//       res.render('pages/logado.ejs', { data: results })
+
+//   })
+// })
 
 
 app.use(express.static(__dirname + '/public'))
