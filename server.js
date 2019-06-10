@@ -184,11 +184,12 @@ app.get('/', (req, res) => {
     res.render('pages/home')
 })
 
-// app.get('/login', (req, res) => {
-//     res.render('pages/login')
-// })
+app.post('/sair', (req, res) => {
+  res.render('pages/home')
+})
 
-app.get('/logado', (req, res) => {
+
+app.get('/show', (req, res) => {
     res.render('pages/home')
 })
 
