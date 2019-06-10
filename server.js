@@ -16,8 +16,8 @@ app.use(bodyParser.urlencoded())  // Com essa configuração, vamos conseguir pa
 app.use(bodyParser.json())
 
 // var port = 27017;
-// var db = 'mongodb://localhost/signup3'// LOCAL
-var db = 'mongodb+srv://Luz:luz07@cluster0-cngjv.mongodb.net/test?retryWrites=true&w=majority'
+var db = 'mongodb://localhost/signup3'// LOCAL
+// var db = 'mongodb+srv://Luz:luz07@cluster0-cngjv.mongodb.net/test?retryWrites=true&w=majority'
 
 mongoose.connect(db);
 var connection = mongoose.connection;
@@ -51,8 +51,23 @@ app.post('/cadastrar', function(req, res) {
         // res.send('error saving user');
         res.render('pages/home')
       } else {
-        res.render('pages/logado')
-        console.log(user);
+        switch (newUser.curso) {
+          case 'HtML':
+            res.render('pages/html')
+            break;
+          case 'CSS':
+              res.render('pages/css')
+              break;
+          case 'NODEJS':
+                  res.render('pages/nodejs')
+                  break;    
+          default:
+              res.render('pages/js')
+              break; 
+        }
+
+        // res.render('pages/logado')
+        // console.log(user);
         // res.send(user);
       }
     });
@@ -60,12 +75,17 @@ app.post('/cadastrar', function(req, res) {
 
   app.post('/autenticar', (req, res) => {
     var dadosForm = req.body;
+    var cursodb = '';
+  
     // console.log(dadosForm)
     // res.send(req.body.senha + req.body.email + '! uhuu!')
+    // connection.db.collection("users")
+     
+
         connection.db.collection("users", function(err, collection){  
         collection.find({}).toArray(function(err, data){
           let validar= false;
-      
+         
           // console.log(dadosForm)
           // console.log(req.body.email)
         for(var i = 0; i < data.length; i++) {
@@ -73,13 +93,29 @@ app.post('/cadastrar', function(req, res) {
 
           if (data[i].email == req.body.email & data[i].senha == req.body.senha) {
             validar = true;
+            cursodb = data[i].curso;
           }
          
         }
 
         if (validar ==  true) {
-          res.render('pages/logado', { data})
-          console.log(data)
+          // res.render('pages/logado', { data} )
+          // console.log(dadosForm);
+          // console.log(cursodb);
+          switch (cursodb) {
+            case 'HtML':
+              res.render('pages/html')
+              break;
+            case 'CSS':
+                res.render('pages/css')
+                break;
+            case 'NODEJS':
+                    res.render('pages/nodejs')
+                    break;    
+            default:
+                res.render('pages/js')
+                break; 
+          }
         } else {
           res.render('pages/home')
         }
@@ -87,14 +123,57 @@ app.post('/cadastrar', function(req, res) {
       })       
 })
  
-// app.get('/show', (req, res) => {
-//   db.collection('data').find().toArray((err, results) => {
-//       if (err) return console.log(err)
-//       res.render('pages/logado.ejs', { data: results })
+app.post('/show', (req, res) => {
 
-//   })
-// })
+  var btn = req.body;
+  // console.log(Object.keys(btn)[0]); 
+  switch (Object.keys(btn)[0]) {
+    case 'HtML':
+        connection.db.collection("curso", function(err, collection){  
+          collection.find({curso: { $eq: 'html'}}).toArray(function(err, data){
+      
+           res.render('pages/es', { data} )
+          //  console.log(cursodb);
+        })
+        connection.close;
+      })
+          break;
+    case 'CSS':
+        connection.db.collection("curso", function(err, collection){  
+          collection.find({curso: { $eq: 'css' }}).toArray(function(err, data){
+      
+           res.render('pages/es', { data} )
+          //  console.log(cursodb);
+        })
+        connection.close;
+      })
+           break;
+    case 'NODEJS':
+        connection.db.collection("curso", function(err, collection){  
+          collection.find({curso: { $eq: 'nodejs' }}).toArray(function(err, data){
+      
+           res.render('pages/es', { data} )
+          //  console.log(cursodb);
+        })
+        connection.close;
+      })
+           
+            break;    
+    default:
+        connection.db.collection("curso", function(err, collection){  
+          collection.find({curso: { $eq: 'js' }}).toArray(function(err, data){
+      
+           res.render('pages/es', { data} )
+          //  console.log(cursodb);
+        })
+        connection.close;
+      })
+    
+        break; 
+  }
 
+ 
+})
 
 app.use(express.static(__dirname + '/public'))
 app.listen(port, () => {
