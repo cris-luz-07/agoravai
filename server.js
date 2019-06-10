@@ -16,8 +16,8 @@ app.use(bodyParser.urlencoded())  // Com essa configuração, vamos conseguir pa
 app.use(bodyParser.json())
 
 // var port = 27017;
-var db = 'mongodb://localhost/signup3'// LOCAL
-// var db = 'mongodb+srv://Luz:luz07@cluster0-cngjv.mongodb.net/test?retryWrites=true&w=majority'
+// var db = 'mongodb://localhost/signup3'// LOCAL
+var db = 'mongodb+srv://Luz:luz07@cluster0-cngjv.mongodb.net/test?retryWrites=true&w=majority'
 
 mongoose.connect(db);
 var connection = mongoose.connection;
